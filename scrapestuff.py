@@ -17,8 +17,14 @@ def prompt():
   #print result
   url = configure_url(user_url)
   print url
-  f = urllib2.urlopen(url)
-  print f.read()
+  page = urllib2.urlopen(url).read()
+  soup = BeautifulSoup(page)
+  print soup.prettify() #made the html nice
+
+  for f in soup.find_all('a'):
+    print f.get('href')
+
+  #soup.body.p.b finds the first bold item inside a paragraph tag inside a body  
 
 def configure_url(url):
   if (not (url.startswith('http://') or url.startswith('https://'))):
