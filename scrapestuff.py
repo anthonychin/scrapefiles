@@ -1,5 +1,3 @@
-import cookielib
-import mechanize
 import os
 import sys
 import urllib
