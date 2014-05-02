@@ -11,15 +11,22 @@ def prompt():
   user_url = raw_input("Enter url to scrape: ").lower()
   url = configure_url(user_url)
   print url
-  page = urllib2.urlopen(url).read()
-  soup = BeautifulSoup(page)
-  # soup.prettify() #made the html nice
-  folder_name = raw_input("Enter folder name to copy file: ")
-  create_folder(folder_name)
-  get_homepage(url, folder_name)
-  for f in soup.find_all('a'):
-    get_files(url, f.get('href'), folder_name)
-  print 'Success, files have been saved'
+
+  try:
+    page = urllib2.urlopen(url).read()
+    soup = BeautifulSoup(page)
+    # soup.prettify() #made the html nice
+    folder_name = raw_input("Enter folder name to copy file: ")
+    create_folder(folder_name)
+    get_homepage(url, folder_name)
+    for f in soup.find_all('a'):
+      get_files(url, f.get('href'), folder_name)
+    print 'Success, files have been saved'
+  except urllib2.HTTPError, e:
+      print e.code
+      print e.msg
+      print e.headers
+      print e.fp.read()
   #soup.body.p.b finds the first bold item inside a paragraph tag inside a body  
 
 def get_homepage(url, folder_name):
@@ -45,9 +52,9 @@ def create_folder(folder):
   print folder
 
 def configure_url(url):
-  if not (url.startswith('http://') or url.startswith('https://')):
-    print "Cannot find http or https protocol, adding http"
-    url = 'http://' + url
+  # if not (url.startswith('http://') or url.startswith('https://')):
+  #   print "Cannot find http or https protocol, adding http"
+  #   url = 'http://' + url
   return url
 
 
