@@ -15,10 +15,11 @@ def prompt():
   # soup.prettify() #made the html nice
   folder_name = raw_input("Enter folder name to copy file: ")
   create_folder(folder_name)
+  get_files(url, folder_name)
   for f in soup.find_all('a'):
     get_files(f.get('href'), folder_name)
   print 'Success, files have been saved'
-  #soup.body.p.b finds the first bold item inside a paragraph tag inside a body  
+  # #soup.body.p.b finds the first bold item inside a paragraph tag inside a body  
 
 def get_files(url, folder_name):
   print url
