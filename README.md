@@ -8,4 +8,4 @@ Why manually downlaod them all?
 How to use:
 
 $python scrapestuff.py
-# provide url as prompt
+#provide url as prompt

@@ -10,23 +10,34 @@ from urlparse import urlsplit
 def prompt():
   user_url = raw_input("Enter url to scrape: ").lower()
   url = configure_url(user_url)
+  print url
   page = urllib2.urlopen(url).read()
   soup = BeautifulSoup(page)
   # soup.prettify() #made the html nice
   folder_name = raw_input("Enter folder name to copy file: ")
   create_folder(folder_name)
-  get_files(url, folder_name)
+  get_homepage(url, folder_name)
   for f in soup.find_all('a'):
-    get_files(f.get('href'), folder_name)
+    get_files(url, f.get('href'), folder_name)
   print 'Success, files have been saved'
   #soup.body.p.b finds the first bold item inside a paragraph tag inside a body  
 
-def get_files(url, folder_name):
+def get_homepage(url, folder_name):
   print url
   filename = url.split('/')[-1]
   if filename:
     fullfilename = os.path.join(folder_name, filename)
     urllib.urlretrieve(url, fullfilename)
+
+def get_files(url, url_link, folder_name):
+  print url_link
+  filename = url_link.split('/')[-1]
+  if filename:
+    fullfilename = os.path.join(folder_name, filename)
+    if 'http' in url_link:
+      urllib.urlretrieve(url_link, fullfilename)
+    else:
+      urllib.urlretrieve(url[:-len(url.split('/')[-1])] + url_link, fullfilename)
 
 def create_folder(folder):
   if not os.path.exists(folder):
