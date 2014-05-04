@@ -1,11 +1,11 @@
 scrapefiles
 ===========
 
-Scrape files (word,pdf,html) from website using Beautiful Soup.
+Scrape files (word,pdf,html and others) from website using Beautiful Soup.
 
-Why manually downlaod them all?
+Why manually download them all?
 
 How to use:
 
-$python scrapestuff.py
-#provide url as prompt
+`$python scrapestuff.py`
+`#provide url as prompt`

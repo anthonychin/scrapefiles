@@ -52,9 +52,9 @@ def create_folder(folder):
   print folder
 
 def configure_url(url):
-  # if not (url.startswith('http://') or url.startswith('https://')):
-  #   print "Cannot find http or https protocol, adding http"
-  #   url = 'http://' + url
+  if not (url.startswith('http://') or url.startswith('https://')):
+    print "Cannot find http or https protocol, adding http"
+    url = 'http://' + url
   return url
 
 
